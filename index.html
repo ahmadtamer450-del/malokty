@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>لملوكتي ♥</title>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Readex+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<section class="screen on" id="s-lock">
+  <h1>لملوكتي ♥</h1>
+  <div class="box"><p>فيه حاجة مستنياكي جوه. اكتبي كلمة السر.</p>
+  <input id="pw" type="password" inputmode="numeric" autocomplete="off" aria-label="كلمة السر" placeholder="••••••••">
+  <div id="err" role="alert"></div>
+  <button id="go">افتحي</button></div>
+</section>
+<section class="screen" id="s-msg">
+  <div class="box"><p id="mt"></p><div class="sig" id="sg"></div><div class="dots" id="dt"></div></div>
+  <div class="row"><button id="nx">التالي</button></div>
+</section>
+<section class="screen" id="s-home" style="justify-content:flex-start">
+  <h2>بدايتنا ♥</h2>
+  <p style="margin:0;color:var(--muted)">من يوم ٦ مايو ٢٠٢٦ وإحنا سوا</p>
+  <div class="cnt" aria-live="off"><div><b id="d">0</b><span>يوم</span></div><div><b id="h">0</b><span>ساعة</span></div><div><b id="m">0</b><span>دقيقة</span></div><div><b id="s">0</b><span>ثانية</span></div></div>
+  <h2>ذكرياتنا</h2>
+  <div id="mems" style="width:100%;display:flex;flex-direction:column;align-items:center"></div>
+  <p style="margin:28px 0 8px;color:var(--muted)">وفي حاجة أخيرة ليكي</p>
+  <button class="env" id="env" aria-label="افتحي الرسالة">💌</button>
+  <div class="row"><button id="again">اقرأي الرسالة تاني</button></div>
+</section>
+<div class="modal" id="lt" role="dialog" aria-modal="true" aria-label="رسالة"><div class="box lbox"><div id="ltxt"></div><div class="row"><button id="cl">قفلي الرسالة</button></div></div></div>
+<div id="player"><button id="pb" aria-label="تشغيل أو إيقاف الأغنية">❚❚</button><span class="song">أغنيتنا</span></div>
+<audio id="au" loop src="media/song.m4a"></audio>
+<script src="script.js"></script>
+</body>
+</html>
