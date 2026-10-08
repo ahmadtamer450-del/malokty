@@ -8,6 +8,11 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="waves" aria-hidden="true">
+<svg class="wave w1" viewBox="0 0 2400 120" preserveAspectRatio="none"><path fill="currentColor" d="M0 60Q150 0 300 60T600 60T900 60T1200 60T1500 60T1800 60T2100 60T2400 60V120H0Z"/></svg>
+<svg class="wave w2" viewBox="0 0 2400 120" preserveAspectRatio="none"><path fill="currentColor" d="M0 60Q150 0 300 60T600 60T900 60T1200 60T1500 60T1800 60T2100 60T2400 60V120H0Z"/></svg>
+<svg class="wave w3" viewBox="0 0 2400 120" preserveAspectRatio="none"><path fill="currentColor" d="M0 60Q150 0 300 60T600 60T900 60T1200 60T1500 60T1800 60T2100 60T2400 60V120H0Z"/></svg>
+</div>
 <section class="screen on" id="s-lock">
   <h1>لملوكتي ♥</h1>
   <div class="box"><p>فيه حاجة مستنياكي جوه. اكتبي كلمة السر.</p>
@@ -23,11 +28,22 @@
   <h2>بدايتنا ♥</h2>
   <p style="margin:0;color:var(--muted)">من يوم ٦ مايو ٢٠٢٦ وإحنا سوا</p>
   <div class="cnt" aria-live="off"><div><b id="d">0</b><span>يوم</span></div><div><b id="h">0</b><span>ساعة</span></div><div><b id="m">0</b><span>دقيقة</span></div><div><b id="s">0</b><span>ثانية</span></div></div>
+  <div class="box lovebox"><p class="phrase" id="ph" aria-live="polite">دوسي على الزرار وهتلاقي كلمة من قلبي ♥</p><button id="lv">عبارة حب جديدة <span class="ic">💗</span></button></div>
+  <div class="row" style="margin:-8px 0 28px"><button id="qz">لعبة أسئلة عننا <span class="ic">🎮</span></button> <button id="mz">لعبة الذكريات <span class="ic">🃏</span></button></div>
   <h2>ذكرياتنا</h2>
   <div id="mems" style="width:100%;display:flex;flex-direction:column;align-items:center"></div>
   <p style="margin:28px 0 8px;color:var(--muted)">وفي حاجة أخيرة ليكي</p>
-  <button class="env" id="env" aria-label="افتحي الرسالة">💌</button>
+  <button class="envp" id="env" aria-label="افتحي الرسالة"><span class="ev"><span class="eb"></span><span class="el"></span><span class="ef"></span><span class="fl"></span><span class="es">M</span></span><span class="et">افتحي رسالتي ♥</span></button>
   <div class="row"><button id="again">اقرأي الرسالة تاني</button></div>
+</section>
+<section class="screen" id="s-mem" style="justify-content:flex-start">
+  <h2>لعبة الذكريات</h2><p class="qprog" id="mh" style="margin:0 0 6px">لاقي كل كارتين متشابهين ♥</p>
+  <div class="grid" id="mg"></div><p id="mw" style="min-height:32px;margin:6px 0"></p>
+  <div class="row"><button id="mr">من الأول</button><button id="mx">رجوع</button></div>
+</section>
+<section class="screen" id="s-quiz">
+  <div class="box"><div class="qprog" id="qp"></div><img id="qi" class="qimg" alt="" hidden><p id="qq" style="margin:10px 0"></p><div id="qo"></div><div class="fb" id="qf" aria-live="polite"></div><div class="row"><button id="qn" hidden>التالي</button></div></div>
+  <div class="row"><button id="qx">رجوع</button></div>
 </section>
 <div class="modal" id="lt" role="dialog" aria-modal="true" aria-label="رسالة"><div class="box lbox"><div id="ltxt"></div><div class="row"><button id="cl">قفلي الرسالة</button></div></div></div>
 <div id="player"><button id="pb" aria-label="تشغيل أو إيقاف الأغنية">❚❚</button><span class="song">أغنيتنا</span></div>
