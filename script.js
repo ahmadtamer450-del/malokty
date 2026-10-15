@@ -5,21 +5,23 @@ var MSG=[
 "ضحكتك لوحدها قادرة تنسيني أي زعل، ونظرة عينيكي بتديني طمأنينة وراحة ما لقتهمش في أي مكان تاني. كل لحظة وأنا جنبك بحس إن ربنا عوضني بيكي عن أي حاجة وحشة شفتها، وإن الحياة جنبك ليها طعم وشكل تاني خالص.",
 "في سنتك الجديدة بتمنالك من كل قلبي إن ربنا يفرح قلبك الأبيض ويحققلك كل خطوة وكل حلم بتتمنيه، وتكون سنة مليانة راحة بال ونجاح وبساطة شبهك. وبوعدك إني هفضل دايمًا في ضهرك وسندك في الحلوة والمرة، وهفضل أحبك كل يوم أكتر من اللي قبله، وهعمل كل اللي في وسعي عشان تفضلي بتضحكي ومرتاحة ومبسوطة.",
 "كل سنة وأنتي معايا ومحليّة عمري، وكل سنة وأنتي ملكة قلبي الأولى والأخيرة. بحبك أوي يا لولييي ♥♥♥"];
-var MEM=[["p1.jpg","أول صورة لينا سوا"],["p2.jpg","يوم المتحف وكان أحلى يوم عيشته في عمري"],["p3.jpg","أول خروجة وأول صورة صورتهالك لوحدك في حياتنا، ومش آخر صورة"],["p4.jpg","أنا والقمر بتاعي يناااس"],["p5.jpg","أجمل وأحن قلب في الدنيا وأجمل حاجة في حياتي"]];
+var MEM=[["p1.jpg","أول صورة لينا سوا"],["p2.jpg","يوم المتحف وكان أحلى يوم عيشته في عمري"],["p3.jpg","أول خروجة وأول صورة صورتهالك لوحدك في حياتنا، ومش آخر صورة"],["p4.jpg","أنا والقمر بتاعي يناااس"],["p5.jpg","أجمل وأحن قلب في الدنيا وأجمل حاجة في حياتي"],["p6.jpg","اليوم ده مش هقدر أنساه يا أجمل حاجة حصلت في حياتي"],["p7.jpg","مستحيل تكوني بني آدم عادي زينا كدا، إنتي جمالك جمال من كوكب تاني"],["p8.jpg","بحبك دي كلمة قليلة أوي عليكي، أنا بدمنك بجد"],["p9.jpg","عيونك مجرات فيها أنا بتوه"],["p10.jpg","ضحكتك لوحدها قادرة تنسيني هموم الدنيا كلها"]];
 var $=function(i){return document.getElementById(i)},au=$("au"),i=0;
-function show(id){document.querySelectorAll(".screen").forEach(function(e){e.classList.remove("on")});$(id).classList.add("on");window.scrollTo(0,0)}
+var cur="s-lock",unlocked=false;
+function hist(m,s){try{history[m]({s:s},"")}catch(e){}}
+function show(id,np){document.querySelectorAll(".screen").forEach(function(e){e.classList.remove("on")});$(id).classList.add("on");window.scrollTo(0,0);if(!np&&id!==cur)hist("pushState",id);cur=id}
 function norm(v){return v.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).trim()}
 function page(){$("mt").textContent=MSG[i];var last=i==MSG.length-1;$("sg").textContent=last?"أحمد ♥":"";$("dt").textContent=MSG.map(function(_,k){return k==i?"●":"○"}).join(" ");$("nx").textContent=last?"كمّلي":"التالي"}
 function unlock(){if(norm($("pw").value)!==PW){$("err").textContent="كلمة السر مش صح، جربي تاني ♥";return}
- $("player").classList.add("on");au.play().catch(function(){});i=0;page();show("s-msg")}
+ $("player").classList.add("on");au.play().catch(function(){});unlocked=true;i=0;show("s-msg",true);page();hist("replaceState","s-msg")}
 $("go").onclick=unlock;$("pw").onkeydown=function(e){if(e.key=="Enter")unlock()};
-$("nx").onclick=function(){if(i<MSG.length-1){i++;page()}else show("s-home")};
-$("again").onclick=function(){i=0;page();show("s-msg")};
-$("pb").onclick=function(){if(au.paused){au.play();$("pb").textContent="❚❚"}else{au.pause();$("pb").textContent="▶"}};
+var seenBd=false;$("nx").onclick=function(){if(i<MSG.length-1){i++;page()}else if(seenBd){show("s-home")}else{seenBd=true;show("s-bd")}};$("bdx").onclick=function(){show("s-home")};
+$("again").onclick=function(){i=0;show("s-msg");page()};
+$("pb").onclick=function(){if(au.paused){au.play();$("pb").innerHTML="<svg class=\"si\" viewBox=\"0 0 64 64\" aria-hidden=\"true\"><use href=\"#i-pause\"/></svg>"}else{au.pause();$("pb").innerHTML="<svg class=\"si\" viewBox=\"0 0 64 64\" aria-hidden=\"true\"><use href=\"#i-play\"/></svg>"}};
 $("mems").innerHTML=MEM.map(function(m){return '<div class="mem"><img src="'+m[0]+'" alt="'+m[1]+'" loading="lazy"><p>'+m[1]+'</p></div>'}).join("");
 var LET=["حبيبتي ونور عيني، ملوكتي..", "مش عارف أبدأ كلامي منين، بس حاسس إن قلبي مليان كلام كتير أوي محتاج يتقال. ساعات بتمر عليا أوقات بقعد فيها مع نفسي وأتأمل حياتي، وبكتشف في كل مرة إن أحسن وأعظم حاجة حصلتلي من يوم ما اتولدت هي وجودك في حياتي.", "يا ملك، إنتي مش مجرد حبيبة، إنتي الأمان اللي كنت طول عمري بدور عليه، السكينة اللي بتنزل على قلبي بعد يوم طويل ومتعب، والضحكة الوحيدة اللي قادرة تمسح أي زعل في ثانية. بجد، لما الدنيا بتضيق بيا أو بحس إني تائه، بمجرد ما بسمع صوتك أو بفتكر ملامحك، بحس إن كل حاجة هتبقى كويسة، وإن طالما إنتي معايا فكل الصعب بيهون.", "عايزك تعرفي إنك مش بس واخدة مكان في قلبي، إنتي بنيتي جوايا بيت كامل ملكك لوحدك، بتفاصيلك، بطيبتك، بحنيتك اللي ملهاش حدود، وبالطريقة اللي بتبصيلي بيها وبتحسسني إني أهم وأغلى إنسان في العالم. كل يوم بيمر وأنا معاكي بتأكد أكتر إن ربنا بيحبني عشان رزقني بيكي؛ بنعمة حقيقية تستاهل أفضل أحمد ربنا عليها طول عمري.", "أنا بوعدك من قلبي إني هفضل دايمًا ضهرك وسندك، الشخص اللي تجري عليه وأنتي مطمنة، اللي يفرح لضحكتك قبل ما أنتي تفرحي، ويشيل عنك أي حزن قبل ما يمس قلبك. وجودك ده عهدي لنفسي إني أحافظ عليه بروحي، وأفضل أشوف اللمعة اللي في عينيكي دي وضحكتك اللي بتنورلي الدنيا كلها.", "بحبك حب أكبر بكتير من أي كلام ممكن يتكتب، بحبك حب حقيقي ملوش نهاية، وبتمنى نفضل مع بعض لآخر العمر، وإيدي في إيدك، وكل خطوة نعديها مع بعض.", "يا أغلى وأحلى ملك في الدنيا.. بحبك من كل قلبي ♥♥🫂"];
 $("ltxt").innerHTML=LET.map(function(x){var p=document.createElement("p");p.textContent=x;return p.outerHTML}).join("")+'<div class="sig">أحمد ♥</div>';
-$("env").onclick=function(){$("env").classList.add("open");setTimeout(function(){$("lt").classList.add("on")},1000)};function closeL(){$("lt").classList.remove("on");$("env").classList.remove("open")}
+$("env").onclick=function(){$("env").classList.add("open");setTimeout(function(){$("lt").classList.add("on")},1000)};function closeL(){$("lt").classList.remove("on");$("sm").classList.remove("on");$("env").classList.remove("open");$("lb").hidden=true}
 $("cl").onclick=closeL;
 $("lt").onclick=function(e){if(e.target==this)closeL()};
 document.onkeydown=function(e){if(e.key=="Escape")closeL()};
@@ -65,11 +67,11 @@ return [
 function startQ(){QS=shuf(buildQ());qi=0;sc=0;show("s-quiz");showQ()}
 function showQ(){locked=false;var q=QS[qi],im=$("qi");$("qp").textContent="سؤال "+(qi+1)+" من "+QS.length;$("qq").textContent=q.q;
 if(q.img){im.src=q.img;im.hidden=false}else{im.hidden=true}
-$("qf").textContent="";$("qn").hidden=true;$("qo").innerHTML="";
+$("qf").textContent="";$("qf").className="fb";$("qn").hidden=true;$("qo").innerHTML="";
 shuf(q.o).forEach(function(t){var b=document.createElement("button");b.className="opt";b.textContent=t;b.onclick=function(){pick(b,t)};$("qo").appendChild(b)})}
 function pick(b,t){if(locked)return;locked=true;var q=QS[qi];
-if(q.a===null||t===q.a){sc++;b.classList.add("ok");$("qf").textContent=q.r||"برافو ♥"}
-else{b.classList.add("no");[].forEach.call($("qo").children,function(x){if(x.textContent===q.a)x.classList.add("ok")});$("qf").textContent="الإجابة الصح: "+q.a+" ♥"}
+if(q.a===null||t===q.a){sc++;b.classList.add("ok");$("qf").textContent=q.r||"برافو ♥";$("qf").className="fb okc"}
+else{b.classList.add("no");[].forEach.call($("qo").children,function(x){if(x.textContent===q.a)x.classList.add("ok")});$("qf").textContent="إجابة غلط، الصح: "+q.a+" ♥";$("qf").className="fb noc"}
 $("qn").textContent=qi==QS.length-1?"النتيجة":"التالي";$("qn").hidden=false}
 $("qn").onclick=function(){if(qi<QS.length-1){qi++;showQ()}else{result()}};
 function result(){$("qp").textContent="";$("qi").hidden=true;$("qo").innerHTML="";$("qn").hidden=true;$("qf").textContent="";
@@ -77,17 +79,82 @@ $("qq").textContent=sc+" من "+QS.length+" — "+(sc==QS.length?"إنتي عا�
 var b=document.createElement("button");b.textContent="العبي تاني";b.onclick=startQ;$("qo").appendChild(b)}
 $("qz").onclick=startQ;$("qx").onclick=function(){show("s-home")};
 
-function mimg(i){return i<5?'<img alt="" src="'+MEM[i][0]+'">':'<div class="hf">♥</div>'}
+function mimg(i){return '<img alt="" src="'+MEM[i][0]+'">'}
 var mlock,mfirst,mdone,mmoves;
-function startM(){mdone=0;mmoves=0;mlock=false;mfirst=null;$("mw").textContent="";$("mg").innerHTML="";
-shuf([0,1,2,3,4,5,0,1,2,3,4,5]).forEach(function(id){var b=document.createElement("button");b.className="mc";b.setAttribute("aria-label","كارت");b.dataset.id=id;
+function startM(){var PK=shuf([0,1,2,3,4,5,6,7,8,9]).slice(0,8);mdone=0;mmoves=0;mlock=false;mfirst=null;$("mw").textContent="";$("mg").innerHTML="";
+shuf(PK.concat(PK)).forEach(function(id){var b=document.createElement("button");b.className="mc";b.setAttribute("aria-label","كارت");b.dataset.id=id;
 b.innerHTML='<div class="mi"><div class="mb">♥</div><div class="mf">'+mimg(id)+'</div></div>';b.onclick=function(){flipM(b)};$("mg").appendChild(b)});show("s-mem")}
 function flipM(b){if(mlock||b.classList.contains("on"))return;b.classList.add("on");if(!mfirst){mfirst=b;return}
 mmoves++;var a=mfirst;mfirst=null;
-if(a.dataset.id===b.dataset.id){a.classList.add("done");b.classList.add("done");mdone++;if(mdone==6)$("mw").textContent="لقيتي كل الذكريات في "+mmoves+" محاولة ♥"}
+if(a.dataset.id===b.dataset.id){a.classList.add("done");b.classList.add("done");mdone++;if(mdone==8)$("mw").textContent="لقيتي كل الذكريات في "+mmoves+" محاولة ♥"}
 else{mlock=true;setTimeout(function(){a.classList.remove("on");b.classList.remove("on");mlock=false},800)}}
 $("mz").onclick=startM;$("mr").onclick=startM;$("mx").onclick=function(){show("s-home")};
+
+var sctx=$("scv").getContext("2d"),sdraw=false,smv=0;
+function paintS(){var g=sctx.createLinearGradient(0,0,600,360);g.addColorStop(0,"#d6d6e2");g.addColorStop(.35,"#f6f6fb");g.addColorStop(.65,"#b8b8c9");g.addColorStop(1,"#ececf4");
+sctx.globalCompositeOperation="source-over";sctx.fillStyle=g;sctx.fillRect(0,0,600,360);
+for(var i=0;i<700;i++){sctx.fillStyle=i%2?"rgba(255,255,255,.22)":"rgba(120,120,140,.14)";sctx.fillRect(Math.random()*600,Math.random()*360,2+Math.random()*3,2+Math.random()*3)}
+sctx.fillStyle="rgba(80,80,105,.78)";sctx.font="700 46px Tahoma,Arial,sans-serif";sctx.textAlign="center";sctx.textBaseline="middle";sctx.fillText("اكشطي هنا ✨",300,180)}
+function startS(){$("scu").textContent=nextPh();paintS();$("scv").className="";smv=0;show("s-scratch")}
+function scratchAt(e){var c=$("scv"),r=c.getBoundingClientRect(),k=c.width/r.width;sctx.globalCompositeOperation="destination-out";sctx.beginPath();sctx.arc((e.clientX-r.left)*k,(e.clientY-r.top)*k,42,0,7);sctx.fill();if(++smv%8==0)checkS()}
+function checkS(){var d=sctx.getImageData(0,0,600,360).data,n=0,tot=0;for(var i=3;i<d.length;i+=160){tot++;if(d[i]<20)n++}if(n/tot>.45)$("scv").className="gone"}
+$("scv").onpointerdown=function(e){sdraw=true;this.setPointerCapture(e.pointerId);scratchAt(e)};
+$("scv").onpointermove=function(e){if(sdraw)scratchAt(e)};
+$("scv").onpointerup=$("scv").onpointercancel=function(){sdraw=false;checkS()};
+$("sc").onclick=startS;$("sn").onclick=startS;$("sx").onclick=function(){show("s-home")};
+
+function openTL(){var d=Math.max(0,Math.floor((Date.now()-T0)/864e5));
+var I=[{d:"٦ مايو ٢٠٢٦",t:"بداية حكايتنا",x:"أول يوم لينا سوا ♥"},
+{d:"١٦ يونيو ٢٠٢٦",t:MEM[0][1],i:MEM[0][0]},
+{d:"١٩ يونيو ٢٠٢٦",t:MEM[1][1],i:MEM[1][0]},
+{d:"٧ يوليو ٢٠٢٦",t:MEM[2][1],i:MEM[2][0]},
+{d:"٧ يوليو ٢٠٢٦",t:MEM[3][1],i:MEM[3][0]},
+{d:"٢٧ يوليو ٢٠٢٦",t:MEM[4][1],i:MEM[4][0]},
+{d:"١١ أكتوبر ٢٠٢٦",t:MEM[5][1],i:MEM[5][0]},
+{d:"١١ أكتوبر ٢٠٢٦",t:MEM[6][1],i:MEM[6][0]},
+{d:"١١ أكتوبر ٢٠٢٦",t:MEM[7][1],i:MEM[7][0]},
+{d:"",t:MEM[8][1],i:MEM[8][0]},
+{d:"١١ أكتوبر ٢٠٢٦",t:MEM[9][1],i:MEM[9][0]},
+{d:"النهارده",t:"وإحنا لسه في الأول",x:"معدّي علينا "+d+" يوم سوا، وبتمنى نفضل مع بعض لآخر العمر وإيدي في إيدك ♥"}];
+var w=$("tlw");w.innerHTML="";
+I.forEach(function(o){var e=document.createElement("div");e.className="tli";var h='<div class="tdot"></div><div class="tcard">';
+if(o.d)h+='<div class="td">'+o.d+'</div>';h+='<h3>'+(o.i?'':o.t)+'</h3>';if(o.i)h=h.replace('<h3></h3>','');
+if(o.x)h+='<p>'+o.x+'</p>';if(o.i)h+='<p>'+o.t+'</p><img alt="" src="'+o.i+'" loading="lazy">';e.innerHTML=h+'</div>';w.appendChild(e)});
+show("s-time");var els=w.querySelectorAll(".tli");
+if(!("IntersectionObserver" in window)){els.forEach(function(e){e.classList.add("in")});return}
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target)}})},{threshold:.15});
+els.forEach(function(e){io.observe(e)})}
+$("tl").onclick=openTL;$("tx").onclick=function(){show("s-home")};
+
+var tapN=0,tapT;
+function secretTap(e){var h=e.currentTarget;h.classList.remove("tap");void h.offsetWidth;h.classList.add("tap");tapN++;clearTimeout(tapT);tapT=setTimeout(function(){tapN=0},1800);if(tapN>=5){tapN=0;$("sm").classList.add("on")}}
+$("s-lock").querySelector("h1").onclick=secretTap;$("s-home").querySelector("h2").onclick=secretTap;
+$("smx").onclick=closeL;$("sm").onclick=function(e){if(e.target==this)closeL()};
+
+var JR=["ضحكتك لوحدها قادرة تمحي أي تعب أو قلق في يومي.", "صوتك بيهدّي روحي بطريقة سحرية.", "إنتي الأمان اللي برتاح فيه بعد كل دربكة.", "إنتي البيت اللي قلبي بيطمن جواه.", "نظرة عينيكي بتديني طمأنينة وراحة ما لقيتهاش في أي مكان تاني.", "كل لحظة وأنا جنبك بحس إن ربنا عوضني بيكي عن أي حاجة وحشة شفتها.", "الحياة جنبك ليها طعم وشكل تاني خالص.", "وجودك محلّي التفاصيل البسيطة في يومي.", "بتخليني أصحى كل يوم متحمس وفرحان، لمجرد إني عارف إنك في حياتي.", "إنتي بنيتي جوايا بيت كامل ملكك لوحدك.", "طيبتك وحنيتك اللي ملهاش حدود.", "بالطريقة اللي بتبصيلي بيها وبتحسسيني إني أهم وأغلى إنسان في العالم.", "إنتي الأمان اللي كنت طول عمري بدور عليه.", "إنتي السكينة اللي بتنزل على قلبي بعد يوم طويل ومتعب.", "بمجرد ما بسمع صوتك بحس إن كل حاجة هتبقى كويسة.", "عشان إنتي ملكة قلبي الأولى والأخيرة.", "عشان اسمك مش مجرد اسم، ده وصف حقيقي لمكانتك في حياتي.", "عشان إنتي ملاك نازل من السما عشان يفرّح أيامي.", "من أول يوم دخلتي فيه حياتي، والدنيا كلها اتبدلت في عيني.", "بقيت بشوف كل حاجة أبهج وأحن وأهدى بسببك.", "إنتي الروح اللي ما أقدرش أعيش من غيرها.", "إنتي السكن والأمان والملجأ اللي بجري عليه من كل دوشة وتعب.", "عشان قلبك الأبيض.", "جمالك جمال من كوكب تاني.", "عيونك مجرات وأنا فيها بتوه.", "ضحكتك قادرة تنسيني هموم الدنيا كلها.", "أنا ممتن لكل لحظة بتجمعنا، ولكل كلمة بنقولها.", "وواثق إن كل حلم بنبنيه سوا هيتحقق بوجودك جنبي.", "حبي ليكي مش بيتقاس بالكلام، وبيكبر مع كل نفس باخده.", "عشان إنتي القمر بتاعي.", "لأنك أجمل وأحن قلب في الدنيا.", "أيامنا سوا مش هقدر أنساها.", "عشان إنتي أجمل نصيب في عمري."];
+var jbag=[],jn=0;
+function startJ(){jn=0;jbag=[];$("jp").className="paper";$("jp").textContent="";$("jc").textContent="";show("s-jar")}
+function drawJ(){var j=$("jj");j.classList.remove("shake");void j.offsetWidth;j.classList.add("shake");var p=$("jp");p.classList.remove("on");
+if(!jbag.length){jbag=shuf(JR);jn=0}var x=jbag.pop();jn++;
+setTimeout(function(){p.innerHTML='<div class="pn">السبب رقم '+jn+'</div><div>'+x+'</div>';p.classList.add("on");
+$("jc").textContent=jbag.length?"فاضل "+jbag.length+" ورقة":"دي كانت آخر ورقة، بس عندي أسباب أكتر من كده ♥"},380)}
+$("jr").onclick=startJ;$("jd").onclick=drawJ;$("jj").onclick=drawJ;$("jx").onclick=function(){show("s-home")};
+
+hist("replaceState","s-lock");
+window.onpopstate=function(e){closeL();var s=e.state&&e.state.s;if(!s)return;if(s==="s-lock"&&unlocked){show("s-home",true);hist("replaceState","s-home");return}show(s,true)};
+document.addEventListener("click",function(e){var i=e.target;if(i.tagName=="IMG"&&(i.closest("#mems")||i.closest(".tcard"))){$("lbi").src=i.src;$("lb").hidden=false}});
+$("lb").onclick=function(){this.hidden=true};
+
 var T0=new Date(2026,4,6).getTime();
+
+function tickA(){var T1=new Date(2027,4,6).getTime(),n=Date.now(),s=Math.max(0,Math.floor((T1-n)/1000)),p=Math.min(100,Math.max(0,(n-T0)/(T1-T0)*100));
+$("an-d").textContent=Math.floor(s/86400);$("an-h").textContent=Math.floor(s%86400/3600);$("an-m").textContent=Math.floor(s%3600/60);$("an-s").textContent=s%60;
+$("an-p").style.width=p.toFixed(1)+"%";
+$("an-t").textContent=s?("عدّينا "+Math.floor(p)+"٪ من أول سنة سوا ♥"):"كل سنة على حكايتنا ♥ عدّت سنة كاملة سوا"}
+setInterval(tickA,1000);
+$("ce").onclick=function(){$("cdy").textContent=Math.max(0,Math.floor((Date.now()-T0)/864e5));show("s-cert")};
+$("an").onclick=function(){tickA();show("s-ann")};
+$("cx").onclick=$("ax").onclick=function(){show("s-home")};
 function tick(){var s=Math.max(0,Math.floor((Date.now()-T0)/1000));$("d").textContent=Math.floor(s/86400);$("h").textContent=Math.floor(s%86400/3600);$("m").textContent=Math.floor(s%3600/60);$("s").textContent=s%60}
 tick();setInterval(tick,1000);
-for(var k=0;k<14;k++){var h=document.createElement("span");h.className="h";h.textContent=k%3?"♥":"💜";h.style.cssText="left:"+Math.random()*96+"%;font-size:"+(14+Math.random()*16)+"px;animation-duration:"+(9+Math.random()*9)+"s;animation-delay:-"+Math.random()*12+"s;color:#B07BD0";document.body.appendChild(h)}
+for(var k=0;k<14;k++){var h=document.createElement("span");h.className="h";h.innerHTML='<svg viewBox="0 0 64 64" width="100%" height="100%"><use href="#i-heart"/></svg>';var hs=16+Math.random()*18;h.style.cssText="left:"+Math.random()*96+"%;width:"+hs+"px;height:"+hs+"px;animation-duration:"+(9+Math.random()*9)+"s;animation-delay:-"+Math.random()*12+"s";document.body.appendChild(h)}
